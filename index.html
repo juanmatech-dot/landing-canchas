@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arena Viva | Complejo Deportivo</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS 4 Play CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Configuración del Tema Tailwind v4 -->
+    <style type="text/tailwindcss">
+        @theme {
+            --color-base: #f8fafc; /* 60% Dominante claro */
+            --color-surface: #ffffff;
+            --color-secondary: #1e293b; /* 30% Secundario oscuro */
+            --color-accent: #16a34a; /* 10% Acento */
+            --color-accent-hover: #15803d;
+            --color-success: #22c55e;
+            --color-error: #ef4444;
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        /* Utilidad personalizada para ocultar scrollbar */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="font-body bg-base text-secondary dark:bg-secondary dark:text-base transition-colors duration-300">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/90 dark:bg-secondary/90 backdrop-blur shadow-sm transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="#" class="font-heading font-bold text-2xl text-accent focus:outline-none focus:ring-2 focus:ring-accent rounded">Arena Viva</a>
+                
+                <!-- Menú Desktop -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#instalaciones" class="hover:text-accent font-medium focus:outline-none focus:ring-2 focus:ring-accent rounded p-1">Instalaciones</a>
+                    <a href="#faq" class="hover:text-accent font-medium focus:outline-none focus:ring-2 focus:ring-accent rounded p-1">Preguntas</a>
+                    <a href="#reserva" class="bg-accent hover:bg-accent-hover text-white px-4 py-2 rounded-md font-medium transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent">Reservar</a>
+                    <button id="theme-toggle-desktop" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-accent" aria-label="Cambiar tema">
+                        🌓
+                    </button>
+                </div>
+
+                <!-- Botón Hamburguesa Móvil -->
+                <div class="md:hidden flex items-center gap-4">
+                    <button id="theme-toggle-mobile" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-accent" aria-label="Cambiar tema móvil">🌓</button>
+                    <button id="mobile-menu-button" class="text-secondary dark:text-base focus:outline-none focus:ring-2 focus:ring-accent rounded p-1" aria-label="Abrir menú">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Menú Móvil Desplegable -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-secondary border-t border-gray-200 dark:border-gray-700">
+            <div class="px-2 pt-2 pb-4 space-y-1">
+                <a href="#instalaciones" class="mobile-link block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-800">Instalaciones</a>
+                <a href="#faq" class="mobile-link block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-800">Preguntas Frecuentes</a>
+                <a href="#reserva" class="mobile-link block px-3 py-2 rounded-md text-base font-medium bg-accent text-white text-center mt-4">Reservar ahora</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center">
+        <!-- Imagen de fondo con capa oscura -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1518605368461-1e1e38ce81e5?q=80&w=2000&auto=format&fit=crop" alt="Cancha sintética de fútbol" class="w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-secondary/70"></div>
+        </div>
+        
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+            <h1 class="font-heading text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-6 leading-tight">Vive el deporte a tu máxima capacidad</h1>
+            <p class="text-lg sm:text-xl text-gray-200 mb-10 max-w-2xl mx-auto">Canchas sintéticas, tenis, voleibol y piscinas de primer nivel. Reserva tu espacio y juega como un profesional.</p>
+            <a href="#reserva" class="inline-block bg-accent hover:bg-accent-hover text-white font-bold text-lg px-8 py-4 rounded-lg shadow-lg transform transition hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-accent focus:ring-opacity-50">Explorar y Reservar</a>
+        </div>
+    </section>
+
+    <!-- Sección Instalaciones (Tarjetas) -->
+    <section id="instalaciones" class="py-20 px-4 max-w-7xl mx-auto">
+        <h2 class="font-heading text-3xl md:text-4xl font-bold text-center mb-12">Nuestras Instalaciones</h2>
+        
+        <!-- Grid de 1 col en móvil, 2 en tablet, 4 en desktop -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            
+            <!-- Tarjeta 1 -->
+            <div class="bg-surface dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 group border border-gray-100 dark:border-gray-700">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1574629810360-7efbb9289569?auto=format&fit=crop&w=600&q=80" alt="Cancha de fútbol sintética" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                </div>
+                <div class="p-6">
+                    <h3 class="font-heading font-bold text-xl mb-2">Fútbol Sintético</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Cancha 5vs5 con grama certificada y excelente iluminación nocturna.</p>
+                    <p class="font-bold text-accent text-lg">$60.000 COP <span class="text-sm font-normal text-gray-500">/ hora</span></p>
+                </div>
+            </div>
+
+            <!-- Tarjeta 2 -->
+            <div class="bg-surface dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 group border border-gray-100 dark:border-gray-700">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1576610616656-d3aa5d1f4534?auto=format&fit=crop&w=600&q=80" alt="Piscina olímpica" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                </div>
+                <div class="p-6">
+                    <h3 class="font-heading font-bold text-xl mb-2">Piscina Olímpica</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Piscina climatizada de 50 metros ideal para entrenamiento libre.</p>
+                    <p class="font-bold text-accent text-lg">$15.000 COP <span class="text-sm font-normal text-gray-500">/ hora</span></p>
+                </div>
+            </div>
+
+            <!-- Tarjeta 3 -->
+            <div class="bg-surface dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 group border border-gray-100 dark:border-gray-700">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?auto=format&fit=crop&w=600&q=80" alt="Pista de tenis" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                </div>
+                <div class="p-6">
+                    <h3 class="font-heading font-bold text-xl mb-2">Pista de Tenis</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Polvo de ladrillo con mantenimiento diario. Incluye préstamo de raquetas.</p>
+                    <p class="font-bold text-accent text-lg">$45.000 COP <span class="text-sm font-normal text-gray-500">/ hora</span></p>
+                </div>
+            </div>
+
+            <!-- Tarjeta 4 -->
+            <div class="bg-surface dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 group border border-gray-100 dark:border-gray-700">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1593786481137-0130dbbf7295?auto=format&fit=crop&w=600&q=80" alt="Cancha de voleibol" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                </div>
+                <div class="p-6">
+                    <h3 class="font-heading font-bold text-xl mb-2">Voleibol Playa</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Arena sílica de alta calidad para equipos de hasta 6vs6.</p>
+                    <p class="font-bold text-accent text-lg">$40.000 COP <span class="text-sm font-normal text-gray-500">/ hora</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección FAQ (Acordeón) -->
+    <section id="faq" class="py-16 bg-white dark:bg-gray-800 transition-colors">
+        <div class="max-w-3xl mx-auto px-4">
+            <h2 class="font-heading text-3xl font-bold text-center mb-10">Preguntas Frecuentes</h2>
+            
+            <div class="space-y-4">
+                <!-- Pregunta 1 -->
+                <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <button class="accordion-btn w-full px-6 py-4 text-left font-bold bg-gray-50 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent flex justify-between items-center" aria-expanded="false">
+                        ¿Qué incluye la reserva de la cancha sintética?
+                        <span class="icon transition-transform duration-300">▼</span>
+                    </button>
+                    <div class="accordion-content hidden px-6 py-4 text-gray-600 dark:text-gray-300">
+                        La reserva incluye el acceso a la cancha por 60 minutos, préstamo de 1 balón profesional y acceso a los camerinos/duchas.
+                    </div>
+                </div>
+
+                <!-- Pregunta 2 -->
+                <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <button class="accordion-btn w-full px-6 py-4 text-left font-bold bg-gray-50 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent flex justify-between items-center" aria-expanded="false">
+                        ¿Hasta qué hora prestan servicio?
+                        <span class="icon transition-transform duration-300">▼</span>
+                    </button>
+                    <div class="accordion-content hidden px-6 py-4 text-gray-600 dark:text-gray-300">
+                        Abrimos todos los días de 6:00 a.m. a 11:00 p.m. Las luces LED nocturnas se encienden automáticamente a las 6:00 p.m. sin costo adicional.
+                    </div>
+                </div>
+
+                <!-- Pregunta 3 -->
+                <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <button class="accordion-btn w-full px-6 py-4 text-left font-bold bg-gray-50 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent flex justify-between items-center" aria-expanded="false">
+                        ¿Puedo cancelar o reprogramar mi reserva?
+                        <span class="icon transition-transform duration-300">▼</span>
+                    </button>
+                    <div class="accordion-content hidden px-6 py-4 text-gray-600 dark:text-gray-300">
+                        Sí, las reprogramaciones deben solicitarse con mínimo 4 horas de anticipación. No hacemos devoluciones de dinero, el saldo queda a favor.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Formulario -->
+    <section id="reserva" class="py-20 px-4 max-w-2xl mx-auto">
+        <h2 class="font-heading text-3xl font-bold text-center mb-4">Solicita tu Reserva</h2>
+        <p class="text-center text-gray-600 dark:text-gray-400 mb-8">Completa los datos y te confirmaremos la disponibilidad al instante.</p>
+        
+        <form id="bookingForm" class="bg-surface dark:bg-gray-800 p-8 rounded-xl shadow-md border border-gray-100 dark:border-gray-700 space-y-6" novalidate>
+            
+            <div>
+                <label for="nombre" class="block text-sm font-bold mb-2">Nombre completo <span class="text-error">*</span></label>
+                <input type="text" id="nombre" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-accent dark:bg-gray-700 dark:text-white" placeholder="Ej. Carlos Pérez">
+                <p id="error-nombre" class="text-error text-xs mt-1 hidden">El nombre es obligatorio.</p>
+            </div>
+
+            <div>
+                <label for="correo" class="block text-sm font-bold mb-2">Correo electrónico <span class="text-error">*</span></label>
+                <input type="email" id="correo" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-accent dark:bg-gray-700 dark:text-white" placeholder="ejemplo@correo.com">
+                <p id="error-correo" class="text-error text-xs mt-1 hidden">Ingresa un correo electrónico válido.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                    <label for="deporte" class="block text-sm font-bold mb-2">Deporte / Instalación</label>
+                    <select id="deporte" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-accent dark:bg-gray-700 dark:text-white">
+                        <option value="futbol">Fútbol Sintético</option>
+                        <option value="piscina">Piscina Olímpica</option>
+                        <option value="tenis">Pista de Tenis</option>
+                        <option value="voleibol">Voleibol Playa</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="fecha" class="block text-sm font-bold mb-2">Fecha deseada</label>
+                    <input type="date" id="fecha" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-accent dark:bg-gray-700 dark:text-white">
+                </div>
+            </div>
+
+            <button type="submit" class="w-full bg-accent hover:bg-accent-hover text-white font-bold py-3 px-4 rounded-md transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent dark:focus:ring-offset-gray-800">
+                Enviar Solicitud
+            </button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-secondary text-white py-10 text-center">
+        <div class="max-w-7xl mx-auto px-4">
+            <h3 class="font-heading font-bold text-2xl mb-4">Arena Viva</h3>
+            <p class="text-gray-400 mb-6">Tu espacio deportivo de confianza.</p>
+            <p class="text-sm text-gray-500">&copy; 2026 Complejo Deportivo Arena Viva. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification (Oculto por defecto) -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-success text-white px-6 py-3 rounded-lg shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 z-50 flex items-center gap-2">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+        <span class="font-bold">Reserva solicitada con éxito.</span>
+    </div>
+
+    <!-- Script de Interacciones y Validación -->
+    <script>
+        // 1. Menú Hamburguesa
+        const btnMenu = document.getElementById('mobile-menu-button');
+        const menuMobile = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        btnMenu.addEventListener('click', () => {
+            menuMobile.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuMobile.classList.add('hidden'); // Cierra el menú al clickear un enlace
+            });
+        });
+
+        // 2. Modo Oscuro (Dark Mode)
+        const html = document.documentElement;
+        const btnDarkDesktop = document.getElementById('theme-toggle-desktop');
+        const btnDarkMobile = document.getElementById('theme-toggle-mobile');
+
+        function toggleTheme() {
+            html.classList.toggle('dark');
+        }
+        btnDarkDesktop.addEventListener('click', toggleTheme);
+        btnDarkMobile.addEventListener('click', toggleTheme);
+
+        // 3. Acordeón (FAQ)
+        const accordions = document.querySelectorAll('.accordion-btn');
+        accordions.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const icon = this.querySelector('.icon');
+                const isExpanded = this.getAttribute('aria-expanded') === 'true';
+
+                // Alternar estado
+                this.setAttribute('aria-expanded', !isExpanded);
+                content.classList.toggle('hidden');
+                icon.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
+            });
+        });
+
+        // 4. Validación de Formulario y Toast
+        const form = document.getElementById('bookingForm');
+        const inputNombre = document.getElementById('nombre');
+        const inputCorreo = document.getElementById('correo');
+        const errorNombre = document.getElementById('error-nombre');
+        const errorCorreo = document.getElementById('error-correo');
+        const toast = document.getElementById('toast');
+
+        // Regex básico para validar email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            let isValid = true;
+
+            // Validar Nombre
+            if (inputNombre.value.trim() === '') {
+                errorNombre.classList.remove('hidden');
+                inputNombre.classList.add('border-error');
+                isValid = false;
+            } else {
+                errorNombre.classList.add('hidden');
+                inputNombre.classList.remove('border-error');
+            }
+
+            // Validar Correo
+            if (!emailRegex.test(inputCorreo.value.trim())) {
+                errorCorreo.classList.remove('hidden');
+                inputCorreo.classList.add('border-error');
+                isValid = false;
+            } else {
+                errorCorreo.classList.add('hidden');
+                inputCorreo.classList.remove('border-error');
+            }
+
+            // Si es válido, mostrar Toast
+            if (isValid) {
+                // Simular envío
+                toast.classList.remove('translate-y-20', 'opacity-0');
+                form.reset(); // Limpiar campos
+                
+                // Ocultar toast después de 4 segundos
+                setTimeout(() => {
+                    toast.classList.add('translate-y-20', 'opacity-0');
+                }, 4000);
+            }
+        });
+    </script>
+</body>
+</html>
